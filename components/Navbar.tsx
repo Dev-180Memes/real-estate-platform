@@ -3,6 +3,7 @@ import { Menu, MenuButton, MenuList, MenuItem, IconButton, Flex, Box, Spacer } f
 import { FcMenu, FcHome, FcAbout } from 'react-icons/fc';
 import { BsSearch } from 'react-icons/bs';
 import { FiKey } from 'react-icons/fi';
+import { FaPlus } from 'react-icons/fa';
 
 const Navbar = () => (
   <Flex p='2' borderBottom='1px' borderColor='gray.100'>
@@ -25,6 +26,9 @@ const Navbar = () => (
           </Link>
           <Link href='/' passHref>
             <MenuItem icon={<FiKey />}>Rent Property</MenuItem>
+          </Link>
+          <Link href='/' passHref>
+            <MenuItem icon={<FaPlus />}>List Property</MenuItem>
           </Link>
         </MenuList>
       </Menu>
