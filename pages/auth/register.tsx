@@ -6,30 +6,37 @@ import {
   Input,
   Button,
 } from '@chakra-ui/react'
-import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import toast from 'react-hot-toast';
 
-const Login = () => {
+const Register = () => {
   const [email, setEmail] = useState<string>('');
+  const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
 
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!email || !password) {
-      alert('Please fill in all fields');
+    if (!email || !username || !password || !confirmPassword) {
+      toast.error('Please fill in all fields');
       return;
     }
 
-    const response = await fetch('/api/auth/login', {
+    if (password !== confirmPassword) {
+      toast.error('Passwords do not match');
+      return;
+    }
+
+    const response = await fetch('/api/auth/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, username, password }),
     });
 
     const data = await response.json();
@@ -60,20 +67,28 @@ const Login = () => {
         }}
         onSubmit={handleSubmit}
       >
-        <Heading>Login</Heading>
+        <Heading>Register</Heading>
         <FormControl isRequired>
           <FormLabel>Email</FormLabel>
           <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
         </FormControl>
         <FormControl isRequired>
+          <FormLabel>Username</FormLabel>
+          <Input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+        </FormControl>
+        <FormControl isRequired>
           <FormLabel>Password</FormLabel>
           <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </FormControl>
-        <p>Don't have an account? <Link href="/auth/register">Register</Link></p>
-        <Button type="submit" colorScheme={'blue'}>Login</Button>
+        <FormControl isRequired>
+          <FormLabel>Confirm Password</FormLabel>
+          <Input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+        </FormControl>
+        <p>Already have an account? <Link href="/auth/login">Login</Link></p>
+        <Button type="submit" colorScheme={'blue'}>Register</Button>
       </form>
     </div>
   )
 }
 
-export default Login
+export default Register

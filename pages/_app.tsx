@@ -2,8 +2,11 @@ import Router from 'next/router';
 import Head from 'next/head';
 import { ChakraProvider } from '@chakra-ui/react';
 import NProgress from 'nprogress';
+import { Toaster } from 'react-hot-toast';
 
 import Layout from '../components/Layout';
+
+import "@uploadthing/react/styles.css";
 
 function MyApp({ Component, pageProps }: { Component: React.ElementType, pageProps: Record<string, any> }) {
   NProgress.configure({ showSpinner: false });
@@ -23,6 +26,7 @@ function MyApp({ Component, pageProps }: { Component: React.ElementType, pagePro
       </Head>
       <ChakraProvider>
         <Layout>
+          <Toaster />
           <Component {...pageProps} />
         </Layout>
       </ChakraProvider>
