@@ -7,6 +7,7 @@ import { IProperty } from '@/models/Property.model';
 import toast from 'react-hot-toast';
 import Property from '@/components/Property';
 import noresult from '@/assets/images/noresult.svg';
+import SearchFilters from '@/components/SearchFilters';
 
 const Search = () => {
   const [properties, setProperties] = useState<IProperty[]>([]);
@@ -30,10 +31,25 @@ const Search = () => {
     fetchProperties();
   }, []);
 
+  // Filter properties based on the listType which is a query parameter
+  useEffect(() => {
+    if (router.query.listType) {
+      const filteredProperties = properties.filter(
+        (property) => property.listType === router.query.listType
+      );
+
+      setProperties(filteredProperties);
+    }
+  }, [router.query.listType]);
+
   // console.log(properties);
+  // console.log(router.query.listType);
+
 
   return (
-    <Box>
+    <Box
+      height={{ base: 'auto', md: '100vh' }}
+    >
       <Flex
         onClick={() => setSearchFilters(!searchFilters)}
         cursor='pointer'
@@ -49,6 +65,10 @@ const Search = () => {
         <Text>Search Property By Filters</Text>
         <Icon paddingLeft='2' w='7' as={BsFilter} />
       </Flex>
+      {searchFilters && <SearchFilters 
+        properties={properties} 
+        setProperties={setProperties}
+      />}
       <Text fontSize='2xl' p='4' fontWeight='bold'>
         Properties {router.query.purpose}
       </Text>

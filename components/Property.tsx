@@ -16,7 +16,7 @@ const Property = ({property} : any) => (
           <Flex paddingTop='2' alignItems='center' justifyContent='space-between'>
             <Flex alignItems='center'>
               <Box paddingRight='3' color='green.400'><GoVerified /></Box>
-              <Text fontWeight='bold' fontSize='lg'>Naira {property.price} {property.listType === 'rent' ? 'Per Rent' : 'For Sale'}</Text>
+              <Text fontWeight='bold' fontSize='lg'>NGN {property.price} {property.listType === 'rent' ? 'Per Rent' : 'For Sale'}</Text>
             </Flex>
           </Flex>
           <Flex alignItems='center' p='1' justifyContent='space-between' w='250px' color='blue.400'>
