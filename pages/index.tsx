@@ -1,31 +1,145 @@
-import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
-import { Flex, Box, Text, Button } from "@chakra-ui/react";
-import Link from "next/link";
+import {
+  Box,
+  Button,
+  Container,
+  Heading,
+  Stack,
+  Text,
+  Link,
+  Image,
+  SimpleGrid,
+  VStack,
+  HStack,
+  Icon,
+  Divider,
+} from '@chakra-ui/react';
+import { FaSearch, FaList, FaMapMarkerAlt } from 'react-icons/fa';
+import NextLink from 'next/link';
 
-const inter = Inter({ subsets: ["latin"] });
-
-export const Banner = ({ purpose, title1, title2, desc1, desc2, buttonText, linkName, imageUrl }: { purpose: string, title1: string, title2: string, desc1: string, desc2: string, buttonText: string, linkName: string, imageUrl: string }) => (
-  <Flex flexWrap={'wrap'} justifyContent={'center'} alignItems={'center'} m={'10'}>
-    <Image src={imageUrl} width={500} height={300} alt="image" />
-    <Box p={'5'}>
-      <Text color={'gray.500'} fontSize={'sm'} fontWeight={'medium'}>{purpose}</Text>
-      <Text fontSize={'3xl'} fontWeight={'bold'}>{title1} <br /> {title2}</Text>
-      <Text fontSize={'lg'} paddingTop={'3'} paddingBottom={'3'} color={'gray.700'}>{desc1} <br /> {desc2}</Text>
-      <Link href={linkName}>
-        <Button fontSize={'xl'} bg={'blue.300'} color={'white'}>{buttonText}</Button>
-      </Link>
-    </Box>
-  </Flex>
-)
-
-export default function Home() {
-  
+const Home = () => {
   return (
-    <>
+    <Box as="main" bg="gray.50" minH="100vh" py={10}>
+      <Container maxW="container.lg">
+        <Stack direction={{ base: 'column', md: 'row' }} spacing={10} align="center" justify="center">
+          <Box flex="1">
+            <Heading as="h1" size="2xl" mb={4}>
+              Discover Your Dream Home
+            </Heading>
+            <Text fontSize="lg" color="gray.700" mb={6}>
+              Find the perfect property with our unique neighborhood insights. Explore schools, hospitals, and other amenities around your future home.
+            </Text>
+            <Stack direction={{ base: 'column', sm: 'row' }} spacing={4}>
+              <NextLink href="/search" passHref>
+                <Button as={Link} colorScheme="blue" size="lg">
+                  Search Properties
+                </Button>
+              </NextLink>
+              <NextLink href="/list" passHref>
+                <Button as={Link} colorScheme="blue" size="lg" variant="outline">
+                  List Your Property
+                </Button>
+              </NextLink>
+            </Stack>
+          </Box>
+          <Box flex="1" display={{ base: 'none', md: 'block' }}>
+            <Image
+              src="/house.jpg" // Replace with your image URL
+              alt="Real Estate"
+              borderRadius="lg"
+              boxShadow="md"
+            />
+          </Box>
+        </Stack>
 
-    </>
+        {/* Features Section */}
+        <Box mt={16}>
+          <Heading as="h2" size="xl" textAlign="center" mb={8}>
+            Why Choose Us
+          </Heading>
+          <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
+            <VStack align="start">
+              <Icon as={FaSearch} w={10} h={10} color="blue.500" />
+              <Heading as="h3" size="md">Comprehensive Search</Heading>
+              <Text color="gray.600">Easily search for properties with detailed insights into neighborhood amenities.</Text>
+            </VStack>
+            <VStack align="start">
+              <Icon as={FaList} w={10} h={10} color="blue.500" />
+              <Heading as="h3" size="md">List Your Property</Heading>
+              <Text color="gray.600">List your property with us and reach a large audience of potential buyers or renters.</Text>
+            </VStack>
+            <VStack align="start">
+              <Icon as={FaMapMarkerAlt} w={10} h={10} color="blue.500" />
+              <Heading as="h3" size="md">Neighborhood Insights</Heading>
+              <Text color="gray.600">Get detailed information about the neighborhood, including schools, hospitals, and more.</Text>
+            </VStack>
+          </SimpleGrid>
+        </Box>
+
+        {/* Testimonials Section */}
+        <Box mt={16}>
+          <Heading as="h2" size="xl" textAlign="center" mb={8}>
+            What Our Users Say
+          </Heading>
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
+            <Box bg="white" p={6} rounded="md" shadow="md">
+              <Text color="gray.600" mb={4}>
+                "This platform made finding my dream home so easy! The neighborhood insights were incredibly helpful in making my decision."
+              </Text>
+              <HStack>
+                <Image
+                  src="/house.jpg" // Replace with your image URL
+                  alt="User Testimonial"
+                  borderRadius="full"
+                  boxSize="50px"
+                />
+                <VStack align="start" spacing={0}>
+                  <Text fontWeight="bold">John Doe</Text>
+                  <Text fontSize="sm" color="gray.500">Home Buyer</Text>
+                </VStack>
+              </HStack>
+            </Box>
+            <Box bg="white" p={6} rounded="md" shadow="md">
+              <Text color="gray.600" mb={4}>
+                "Listing my property was a breeze. The platform's user-friendly interface and large audience made the process smooth and efficient."
+              </Text>
+              <HStack>
+                <Image
+                  src="/house.jpg" // Replace with your image URL
+                  alt="User Testimonial"
+                  borderRadius="full"
+                  boxSize="50px"
+                />
+                <VStack align="start" spacing={0}>
+                  <Text fontWeight="bold">Jane Smith</Text>
+                  <Text fontSize="sm" color="gray.500">Property Owner</Text>
+                </VStack>
+              </HStack>
+            </Box>
+          </SimpleGrid>
+        </Box>
+
+        {/* Footer Section */}
+        <Divider my={16} />
+        <Box as="footer" textAlign="center" py={8}>
+          <Text color="gray.600" mb={4}>© 2024 Your Real Estate Platform. All rights reserved.</Text>
+          <HStack spacing={8} justify="center">
+            <NextLink href="/about" passHref>
+              <Link color="blue.500">About Us</Link>
+            </NextLink>
+            <NextLink href="/contact" passHref>
+              <Link color="blue.500">Contact</Link>
+            </NextLink>
+            <NextLink href="/terms" passHref>
+              <Link color="blue.500">Terms of Service</Link>
+            </NextLink>
+            <NextLink href="/privacy" passHref>
+              <Link color="blue.500">Privacy Policy</Link>
+            </NextLink>
+          </HStack>
+        </Box>
+      </Container>
+    </Box>
   );
-}
+};
 
+export default Home;

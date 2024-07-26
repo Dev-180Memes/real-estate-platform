@@ -21,12 +21,6 @@ const Navbar = () => (
           <Link href='/search' passHref>
             <MenuItem icon={<BsSearch />}>Search</MenuItem>
           </Link>
-          <Link href='/search?listType=sale' passHref>
-            <MenuItem icon={<FcAbout />}>Buy Property</MenuItem>
-          </Link>
-          <Link href='/search?listType=rent' passHref>
-            <MenuItem icon={<FiKey />}>Rent Property</MenuItem>
-          </Link>
           <Link href='/list' passHref>
             <MenuItem icon={<FaPlus />}>List Property</MenuItem>
           </Link>
