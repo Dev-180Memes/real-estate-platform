@@ -5,7 +5,6 @@ import {
   Heading,
   Stack,
   Text,
-  Link,
   Image,
   SimpleGrid,
   VStack,
@@ -14,7 +13,7 @@ import {
   Divider,
 } from '@chakra-ui/react';
 import { FaSearch, FaList, FaMapMarkerAlt } from 'react-icons/fa';
-import NextLink from 'next/link';
+import Link from 'next/link';
 
 const Home = () => {
   return (
@@ -29,16 +28,16 @@ const Home = () => {
               Find the perfect property with our unique neighborhood insights. Explore schools, hospitals, and other amenities around your future home.
             </Text>
             <Stack direction={{ base: 'column', sm: 'row' }} spacing={4}>
-              <NextLink href="/search" passHref>
-                <Button as={Link} colorScheme="blue" size="lg">
+              <Link href="/search" passHref>
+                <Button colorScheme="blue" size="lg">
                   Search Properties
                 </Button>
-              </NextLink>
-              <NextLink href="/list" passHref>
-                <Button as={Link} colorScheme="blue" size="lg" variant="outline">
+              </Link>
+              <Link href="/list" passHref>
+                <Button colorScheme="blue" size="lg" variant="outline">
                   List Your Property
                 </Button>
-              </NextLink>
+              </Link>
             </Stack>
           </Box>
           <Box flex="1" display={{ base: 'none', md: 'block' }}>
@@ -121,20 +120,19 @@ const Home = () => {
         {/* Footer Section */}
         <Divider my={16} />
         <Box as="footer" textAlign="center" py={8}>
-          <Text color="gray.600" mb={4}>© 2024 Your Real Estate Platform. All rights reserved.</Text>
+          <Text color="gray.600" mb={4}>© 2024 Realtor. All rights reserved.</Text>
           <HStack spacing={8} justify="center">
-            <NextLink href="/about" passHref>
-              <Link color="blue.500">About Us</Link>
-            </NextLink>
-            <NextLink href="/contact" passHref>
-              <Link color="blue.500">Contact</Link>
-            </NextLink>
-            <NextLink href="/terms" passHref>
-              <Link color="blue.500">Terms of Service</Link>
-            </NextLink>
-            <NextLink href="/privacy" passHref>
-              <Link color="blue.500">Privacy Policy</Link>
-            </NextLink>
+            <Link href="/about" passHref>About Us
+            </Link>
+            <Link href="/contact" passHref>
+              Contact
+            </Link>
+            <Link href="/terms" passHref>
+              Terms of Service
+            </Link>
+            <Link href="/privacy" passHref>
+              Privacy Policy
+            </Link>
           </HStack>
         </Box>
       </Container>
