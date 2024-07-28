@@ -94,7 +94,7 @@ const Property = () => {
                 center={{ lat: 37.7749, lng: -122.4194 }}
             />
 
-            <Text fontSize='md' fontWeight='bold'>Schools</Text>
+            <Text fontSize='md' fontWeight='bold'>Restaurants</Text>
             <EmbedSite
                 query={`restaurants in ${property.localGovernment}`}
                 apiKey={process.env.NEXT_PUBLIC_GOOGLE_API_KEY!}
