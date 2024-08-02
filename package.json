@@ -16,6 +16,7 @@
     "axios": "^1.7.2",
     "bcryptjs": "^2.4.3",
     "framer-motion": "^11.3.4",
+    "google-maps": "^4.3.3",
     "jsonwebtoken": "^9.0.2",
     "millify": "^6.1.0",
     "mongoose": "^8.5.1",

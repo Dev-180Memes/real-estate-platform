@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Box } from '@chakra-ui/layout';
+import type { google } from 'google-maps';
 
 interface GoogleMapProps {
   apiKey: string;
@@ -8,6 +9,7 @@ interface GoogleMapProps {
 }
 
 const GoogleMap: React.FC<GoogleMapProps> = ({ apiKey, center, query }) => {
+
   const mapRef = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<google.maps.Map | null>(null);
 
@@ -30,7 +32,11 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ apiKey, center, query }) => {
         query,
       };
 
-      service.textSearch(request, (results, status) => {
+      service.textSearch({
+        location: new google.maps.LatLng(center.lat, center.lng),
+        radius: 1000,
+        query,
+      }, (results, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
           results?.forEach((place) => {
             if (place.geometry?.location) {
@@ -40,7 +46,9 @@ const GoogleMap: React.FC<GoogleMapProps> = ({ apiKey, center, query }) => {
               });
             }
           });
-          map.setCenter(results[0].geometry?.location);
+          if (results[0].geometry?.location) {
+            map.setCenter(results[0].geometry.location);
+          }
         }
       });
     }
