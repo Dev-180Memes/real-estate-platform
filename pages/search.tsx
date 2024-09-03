@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { Flex, Box, Text, Icon } from '@chakra-ui/react';
+import { Flex, Box, Text, Icon, Grid } from '@chakra-ui/react';
 import { BsFilter } from 'react-icons/bs';
 import { IProperty } from '@/models/Property.model';
 import toast from 'react-hot-toast';
@@ -31,7 +31,6 @@ const Search = () => {
     fetchProperties();
   }, []);
 
-  // Filter properties based on the listType which is a query parameter
   useEffect(() => {
     if (router.query.listType) {
       const filteredProperties = properties.filter(
@@ -42,13 +41,10 @@ const Search = () => {
     }
   }, [router.query.listType]);
 
-  // console.log(properties);
-  // console.log(router.query.listType);
-
-
   return (
     <Box
       height={{ base: 'auto', md: '100vh' }}
+      p="4"
     >
       <Flex
         onClick={() => setSearchFilters(!searchFilters)}
@@ -72,12 +68,12 @@ const Search = () => {
       <Text fontSize='2xl' p='4' fontWeight='bold'>
         Properties {router.query.purpose}
       </Text>
-      <Flex flexWrap='wrap'>
+      <Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }} gap={6}>
         {properties.map((property) => <Property key={property.id} property={property} />)}
-      </Flex>
+      </Grid>
       {properties.length === 0 && (
-        <Flex justifyContent='center' alignItems='center' flexDir='column' marginTop='5' marginBottom='5'>
-          <Image src={noresult} width={100} height={100} alt='' />
+        <Flex justifyContent='center' alignItems='center' flexDir='column' marginTop='5' marginBottom='5' height='50vh'>
+          <Image src={noresult} width={300} height={300} alt='No Result Found' />
           <Text fontSize='xl' marginTop='3'>No Result Found.</Text>
         </Flex>
       )}
@@ -85,4 +81,4 @@ const Search = () => {
   )
 }
 
-export default Search
+export default Search;

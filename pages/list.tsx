@@ -246,4 +246,4 @@ const List = () => {
   )
 }
 
-export default withAuth(List);
+export default List;
