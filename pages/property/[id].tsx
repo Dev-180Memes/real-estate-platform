@@ -10,6 +10,8 @@ import toast from 'react-hot-toast';
 import Image from 'next/image';
 import { IProperty } from '@/models/Property.model';
 import EmbedSite from '@/components/EnbedSite';
+import Link from 'next/link';
+import button from '@/assets/images/button.png';
 
 const Property = () => {
     const [property, setProperty] = useState<IProperty | null>(null);
@@ -35,6 +37,8 @@ const Property = () => {
     if (!property) {
         return null
     }
+
+    console.log(property);
 
   return (
     <Box maxWidth={'1000px'} margin={'auto'} p={'4'}>
@@ -73,6 +77,19 @@ const Property = () => {
                 <Spacer />
                 <Box paddingRight='3' color='green.400'><FaBath /></Box>
                 <Text>{property.bathrooms} Bathrooms</Text>
+            </Flex>
+        </Box>
+
+        {/* Talk to Agent whatsapp button */}
+        <Box p='6'>
+            <Text fontSize='xl' fontWeight='bold'>Talk to Agent</Text>
+            <Flex paddingTop='2' alignItems='center'>
+                <Avatar name={property.agentName} src={`https://wa.me/${property.agentPhone}`} />
+                <Text paddingLeft='3'>{property.agentName}</Text>
+                <Spacer />
+                <Link href={`https://wa.me/${property.agentPhone}`}>
+                    <Image src={button} width={150} height={150} alt=''/>
+                </Link>
             </Flex>
         </Box>
 
